@@ -11,7 +11,7 @@
                                      initial-scale=1.0, 
                                      maximum-scale=1.0, 
                                      user-scalable=no">
-<title>登录</title>
+<title>小说辅助器</title>
 <!--  Bootstrap 核心 CSS 文件 -->
 <link
 	href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css"
@@ -21,27 +21,278 @@
 <!--  Bootstrap 核心 JavaScript 文件 -->
 <script
 	src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+body {
+    background: #FFF;
+}
+
+button{
+    clear:both;
+    display:block;
+    margin:20px auto;
+    outline:none;
+    border-radius:30px;
+    border:1px solid #eee;
+    background:#FFF;
+    padding:10px 40px;
+    color:#555;
+}
+
+.des {
+    font-size: 12px;
+    color: #aaa;
+    width:600px;
+    margin:auto;
+}
+
+td{
+    border:0;
+    border-top:1px dashed #eee;
+    border-left: 1px dashed #eee;
+    padding:3px 25px;
+    color:#555;
+    font-size:12px;
+    
+}
+ 
+td:last-child{ 
+   	 border-right: 1px dashed #eee;
+    }
+table{
+    margin-top:20px;
+    width:600px;
+    margin:auto;
+}
+span{
+  color:#F00;
+  margin: auto;
+}
+</style>
 <script type="text/javascript">
-	function test() {
-		var username = $("#username").val();
-		$.ajax({
-			url : "/getUserByName",
-			data : {
-				username : username
-			},
-			success : function(data) {
-				alert(data);
-				$("#test").html(data);
-			}
-		});
+	// 生成随机姓名
+	function getName1() {
+		// 常用的姓
+		var familyNames = new Array("赵", "钱", "孙", "李", "周", "吴", "郑", "王",
+				"冯", "陈", "褚", "卫", "蒋", "沈", "韩", "杨", "朱", "秦", "尤", "许",
+				"何", "吕", "施", "张", "孔", "曹", "严", "华", "金", "魏", "陶", "姜",
+				"戚", "谢", "邹", "喻", "柏", "水", "窦", "章", "云", "苏", "潘", "葛",
+				"奚", "范", "彭", "郎", "鲁", "韦", "昌", "马", "苗", "凤", "花", "方",
+				"俞", "任", "袁", "柳", "酆", "鲍", "史", "唐", "费", "廉", "岑", "薛",
+				"雷", "贺", "倪", "汤", "滕", "殷", "罗", "毕", "郝", "邬", "安", "常",
+				"乐", "于", "时", "傅", "皮", "卞", "齐", "康", "伍", "余", "元", "卜",
+				"顾", "孟", "平", "黄", "和", "穆", "萧", "尹");
+
+		// 常用的名
+		var givenNames = new Array("子璇", "淼", "国栋", "夫子", "瑞堂", "甜", "敏", "尚",
+				"国贤", "贺祥", "晨涛", "昊轩", "易轩", "益辰", "益帆", "益冉", "瑾春", "瑾昆",
+				"春齐", "杨", "文昊", "东东", "雄霖", "浩晨", "熙涵", "溶溶", "冰枫", "欣欣",
+				"宜豪", "欣慧", "建政", "美欣", "淑慧", "文轩", "文杰", "欣源", "忠林", "榕润",
+				"欣汝", "慧嘉", "新建", "建林", "亦菲", "林", "冰洁", "佳欣", "涵涵", "禹辰",
+				"淳美", "泽惠", "伟洋", "涵越", "润丽", "翔", "淑华", "晶莹", "凌晶", "苒溪",
+				"雨涵", "嘉怡", "佳毅", "子辰", "佳琪", "紫轩", "瑞辰", "昕蕊", "萌", "明远",
+				"欣宜", "泽远", "欣怡", "佳怡", "佳惠", "晨茜", "晨璐", "运昊", "汝鑫", "淑君",
+				"晶滢", "润莎", "榕汕", "佳钰", "佳玉", "晓庆", "一鸣", "语晨", "添池", "添昊",
+				"雨泽", "雅晗", "雅涵", "清妍", "诗悦", "嘉乐", "晨涵", "天赫", "玥傲", "佳昊",
+				"天昊", "萌萌", "若萌");
+
+		// 随机取一个姓
+		var i = Math.floor((Math.random() * familyNames.length));
+		var familyName = familyNames[i];
+
+		// 随机取一个名
+		var j = Math.floor((Math.random() * givenNames.length));
+		var givenName = givenNames[j];
+
+		var name = familyName + givenName;
+		return name;
 	}
+
+	$(function() {
+		$("#createNamesButton").click(function() {
+			var text="";
+			// 生成十个随机姓名
+			for (var t = 0; t < 10; t++) {
+				text+=getName1()+" ";
+			}
+			$("#namesContainerDiv").text(text);
+		});
+	});
+</script>
+<script type="text/javascript">
+function getIdNo() {
+    var coefficientArray = ["7", "9", "10", "5", "8", "4", "2", "1", "6", "3", "7", "9", "10", "5", "8", "4", "2"]; // 加权因子
+    var lastNumberArray = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"]; // 校验码
+    var address = "420101"; // 住址
+    
+    var birthday = ""+(parseInt(40* Math.random())+1960)+"0"+(parseInt(9* Math.random())+1)+(parseInt(20* Math.random())+10) ; // 生日
+    var s = Math.floor(Math.random() * 10).toString() + Math.floor(Math.random() * 10).toString() + Math.floor(Math.random() * 10).toString();
+    var array = (address + birthday + s).split("");
+    var total = 0;
+    for (var i = 0; i < array.length; i++) {
+        total = total + parseInt(array[i]) * parseInt(coefficientArray[i]);
+    }
+    var lastNumber = lastNumberArray[parseInt(total % 11)];
+    var id_no_String = address + birthday + s + lastNumber;
+
+    return id_no_String;
+}
+
+// 生成随机姓名
+function getName() {
+    var familyNames = "赵钱孙李周吴郑王冯陈褚卫蒋沈韩杨朱秦尤许何吕施张孔曹严华金魏陶姜戚谢邹喻柏水窦章云苏潘葛奚范彭郎鲁韦昌马苗凤花方俞任袁柳酆鲍史唐费廉岑薛雷贺倪汤滕殷罗毕郝邬安常乐于时傅皮卞齐康伍余元卜顾孟平黄和穆萧尹姚邵湛汪祁毛禹狄米贝明臧计伏成戴谈宋茅庞熊纪舒屈项祝董梁杜阮蓝闵席季麻强贾路娄危江童颜郭梅盛林刁钟徐邱骆高夏蔡田樊胡凌霍虞万支柯昝管卢莫经房裘缪干解应宗丁宣贲邓郁单杭洪包诸左石崔吉钮龚程嵇邢滑裴陆荣翁荀羊於惠甄曲家封芮羿储靳汲邴糜松井段富巫乌焦巴弓牧隗山谷车侯宓蓬全郗班仰秋仲伊宫宁仇栾暴甘钭厉戎祖武符刘景詹束龙叶幸司韶郜黎蓟薄印宿白怀蒲邰从鄂索咸籍赖卓蔺屠蒙池乔阴鬱胥能苍双闻莘党翟谭贡劳逄姬申扶堵冉宰郦雍卻璩桑桂濮牛寿通边扈燕冀郏浦尚农温别庄晏柴瞿阎充慕连茹习宦艾鱼容向古易慎戈廖庾终暨居衡步都耿满弘匡国文寇广禄阙东欧殳沃利蔚越夔隆师巩厍聂晁勾敖融冷訾辛阚那简饶空曾毋沙乜养鞠须丰巢关蒯相查后荆红游竺权逯盖益桓公万俟司马上官欧阳夏侯诸葛闻人东方赫连皇甫尉迟公羊澹台公冶宗政濮阳淳于单于太叔申屠公孙仲孙轩辕令狐钟离宇文长孙慕容鲜于闾丘司徒司空丌官司寇仉督子车颛孙端木巫马公西漆雕乐正壤驷公良拓跋夹谷宰父谷梁晋楚闫法汝鄢涂钦段干百里东郭南门呼延归海羊舌微生岳帅缑亢况郈有琴梁丘左丘东门西门商牟佘佴伯赏南宫墨哈谯笪年爱阳佟";
+    var givenNames = "子璇淼国栋夫子瑞堂甜敏尚国贤贺祥晨涛昊轩易轩辰益帆冉瑾春瑾昆春齐杨文昊东雄霖浩晨熙涵溶溶冰枫欣宜豪欣慧建政美欣淑慧文轩杰欣源忠林榕润欣汝慧嘉新建建林亦菲林冰洁佳欣涵涵禹辰淳美泽惠伟洋涵越润丽翔淑华晶莹凌晶苒溪雨涵嘉怡佳毅子辰佳琪紫轩瑞辰昕蕊萌明远欣宜泽远欣怡佳怡佳惠晨茜晨璐运昊汝鑫淑君晶滢润莎榕汕佳钰佳玉晓庆一鸣语晨添池添昊雨泽雅晗雅涵清妍诗悦嘉乐晨涵天赫玥傲佳昊天昊萌萌若萌测试身份证号大全和名由程序随机组合而成所有信息均为虚构生成不会泄密真实公民隐私信息也非现实生活中真实的身份证号码和真实名身份证号码所属年龄均为岁以上均已通过校验身份证号码和名仅供测试或用在必须输入身份证号码和名的网站上请不要将身份证号码和名用于任何非法用途且自行承担使用本工具的任何后果和责任";
+
+    var i = parseInt(familyNames.length * Math.random());
+    var familyName = familyNames.substr(i,1);
+    var len=givenNames.length;
+    var j = parseInt(len * Math.random()) ;
+    var k = parseInt(len * Math.random()) ;
+    var givenName = givenNames.substr(j,1)+givenNames.substr(k,1);
+    var name = familyName + givenName;
+    return name;
+}
+
+//生成随机银行卡号
+function getBankAccount() {
+
+    // var bank_no = document.getElementById("bank_no_select").value; 
+    var bank_no = '0102';
+    var prefix = "";
+    switch (bank_no) {
+    case "0102":
+        prefix = "622202";
+        break;
+    case "0103":
+        prefix = "622848";
+        break;
+    case "0105":
+        prefix = "622700";
+        break;
+    case "0301":
+        prefix = "622262";
+        break;
+    case "104":
+        prefix = "621661";
+        break;
+    case "0303":
+        prefix = "622666";
+        break;
+    case "305":
+        prefix = "622622";
+        break;
+    case "0306":
+        prefix = "622556";
+        break;
+    case "0308":
+        prefix = "622588";
+        break;
+    case "0410":
+        prefix = "622155";
+        break;
+    case "302":
+        prefix = "622689";
+        break;
+    case "304":
+        prefix = "622630";
+        break;
+    case "309":
+        prefix = "622908";
+        break;
+    case "310":
+        prefix = "621717";
+        break;
+    case "315":
+        prefix = "622323";
+        break;
+    case "316":
+        prefix = "622309";
+        break;
+    default:
+    }
+
+    for (var j = 0; j < 13; j++) {
+        prefix = prefix + Math.floor(Math.random() * 10);
+    }
+
+    // var x = document.getElementsByName("bank_no");
+    // for (var i = 0; i < x.length; i++) {
+    //     var o = x[i];
+    //     o.value = bank_no;
+    // }
+    // var y = document.getElementsByName("bank_account");
+    // for (var i = 0; i < y.length; i++) {
+    //     var o = y[i];
+    //     o.value = prefix;
+    // }
+    return prefix;
+}
+
+function genrate() {
+    trs = '';
+    for (var i = 1; i <= 20; i++) {
+        trs = trs + '<tr><td>' + i + '</td><td>' + getName() + '</td><td> 身份证：' + getIdNo() + ' <br/>银行卡：' + getBankAccount() + '</td></tr>';
+    }
+    trs = '<table>' + trs + '</table>';
+    $("#namesContainerDiv").html(trs);//.innerHTML = trs;
+}
+genrate();
+</script>
+<script type="text/javascript">
+function getName3() {
+
+//     var selectedLayers = context.selection;
+//     var selectedCount = selectedLayers.count();
+
+//     var selectedLayers =[];
+    var selectedCount = 100;
+    // Notify users to select at least 1 textbox
+//     if (selectedCount == 0) {
+//         [NSApp displayDialog:@"选一个生成一个，选一堆生成一堆哟~" withTitle:@"请选择至少一个文本框"];
+//     } 
+
+        var layer = "";
+    // Process names
+    for (var i = 0; i < selectedCount; i++) {
+
+//         var layer = selectedLayers[i];
+
+        var humanNameFirst = ["李","王","张","刘","陈","杨","赵","黄","周","吴","徐","孙","胡","朱","高","林","何","郭","马","罗","梁","宋","郑","谢","韩","唐","冯","于","董","萧","程","曹","袁","邓","许","傅","沈","曾","彭","吕","苏","卢","蒋","蔡","贾","丁","魏","薛","叶","阎","余","潘","杜","戴","夏","锺","汪","田","任","姜","范","方","石","姚","谭","廖","邹","熊","金","陆","郝","孔","白","崔","康","毛","邱","秦","江","史","顾","侯","邵","孟","龙","万","段","雷","钱","汤","尹","黎","易","常","武","乔","贺","赖","龚","文"];
+        var humanNameDoubleForThree = ["静静","婷婷","园园","明明","冰冰","莎莎","乐乐","晶晶","诗诗","倩倩","菲菲"];
+        var humanNameSecondForTwo = ["伟","强","华","志","建","立","超","荣","文","达","敏","江","晖","刚","雷","磊","春","夏","哲","东","冬","楠","昊","宇","慧","瑶","翔","星","燕","迪","钰","俊","怡","雪","佳","杰","芮","可","涵","熙","裕"];
+        var humanNameSecondForThree = ["小","明","国","万","梓","浩","晓","德","力","世","秀","春","子","天","金","江","泽","玉","紫","亦","家","文","达","光","梦","永","成","婷","洪","俊","恒","恩","雅","轩","若","欣","怡","一","常"];
+        var humanNameThirdForThree = ["平","芳","华","云","海","宣","盛","强","梅","志","慧","博","敏","春","夏","杰","宇","翔","北","秋","东","新","瑶","豪","星","燕","铭","奇","康","鑫","凯","雨","栋","梁","瑞","龙","宜","彤","芮","逸","扬","林"];
+        var twoOrThree = Math.random();
+		if (twoOrThree > 0.97) {
+			a = Math.floor(Math.pow(Math.random(), 3) * humanNameFirst.length + 1)-1;
+			b = Math.floor(Math.pow(Math.random(), 1.1) * humanNameDoubleForThree.length + 1)-1;
+			layer+=" "+ humanNameFirst[a] + humanNameDoubleForThree[b];
+// 			layer.stringValue = humanNameFirst[a] + humanNameDoubleForThree[b];
+		}
+		else if (twoOrThree > 0.6) {
+		 	m = Math.floor(Math.pow(Math.random(), 3) * humanNameFirst.length + 1)-1;
+		 	n = Math.floor(Math.pow(Math.random(), 1.5) * humanNameSecondForTwo.length + 1)-1;
+		 	layer+=" "+  humanNameFirst[m] + humanNameSecondForTwo[n];
+		 }
+		 else {
+		 	x = Math.floor(Math.pow(Math.random(), 3) * humanNameFirst.length + 1)-1;
+		 	y = Math.floor(Math.pow(Math.random(), 1.5) * humanNameSecondForThree.length + 1)-1;
+		 	z = Math.floor(Math.pow(Math.random(), 1.5) * humanNameThirdForThree.length + 1)-1;
+		 	layer+=" "+  humanNameFirst[x] + humanNameSecondForThree[y] + humanNameThirdForThree[z];
+		 }
+         
+    };
+    return layer;
+};
+function getName33(){
+	$("#namesContainerDiv").html(getName3());
+};
 </script>
 </head>
 <body>
-	<h1>登录页面</h1>
-	<input type="text" id="username" />
-	<br />
-	<input type="button" value="查询" onclick="test()" />
-	<div id="test"></div>
+	<h1>首页</h1>
+	<input type="button" id="createNamesButton" value="生成" />
+	<input type="button" onclick="genrate()" value="生成2" />
+	<input type="button" onclick="getName33()" value="生成3" />
+	<div id="namesContainerDiv"></div>
 </body>
 </html>

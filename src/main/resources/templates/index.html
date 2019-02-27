@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<title>小说辅助器</title>
+<!--  导入Bootstrap和JQuery -->
+<link href="css/lib/bootstrap.min.css" rel="stylesheet" />
+<script src="js/lib/jquery.min.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
+<!-- 自定义的css样式 -->
+<link href="css/mycommons.css" rel="stylesheet">
+<!-- 自定义的js脚本 -->
+<script src="js/MyUtil.js"></script>
+<script src="js/globalVar.js"></script>
+<script src="js/myAjax.js"></script>
+<script src="js/myListener.js"></script>
+
+<style type="text/css">
+#tab-contents div {
+	display: none
+}
+
+#tab-contents div:first-child {
+	display: block
+}
+</style>
+<script type="text/javascript">
+	$(function() {
+		$('#tab-titles li').click(
+				function() {
+					$(this).siblings().find('a').removeClass("active");
+					$(this).find("a").addClass("active");
+					$('#tab-contents div:eq(' + $(this).prevAll().length + ')')
+							.show().siblings('div').hide();
+				});
+	});
+</script>
+</head>
+<body>
+	<h1>首页</h1>
+	<div class="container">
+		<ul id="tab-titles" class="nav nav-tabs">
+			<li class="nav-item"><a class="nav-link active">人名生成器</a></li>
+			<li class="nav-item"><a class="nav-link ">人物生成器</a></li>
+			<li class="nav-item"><a class="nav-link ">地名生成器</a></li>
+			<li class="nav-item"><a class="nav-link ">人物管理器</a></li>
+		</ul>
+		<div id="tab-contents">
+			<div>
+			筛选：性别
+			<select>
+			<option>男</option>
+			<option>女</option>
+			</select>
+			</div>
+			<div>人物生成器</div>
+			<div>地名生成器</div>
+			<div>人物管理器</div>
+		</div>
+	</div>
+</body>
+</html>
