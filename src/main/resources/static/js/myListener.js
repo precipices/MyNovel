@@ -24,11 +24,11 @@ $(function() {
 		if (val == 0) {
 			// $('#create-way-div').show();
 			// $('#create-num-div').show();
-			// $('#surname-num-div').show();
-			$('#name-num-div').hide();
+			// $('#xing-num-div').show();
+//			$('#ming-num-div').hide();
 			$('#sex-div').hide();
 		} else if (val == 1) {
-			$('#name-num-div').show();
+//			$('#ming-num-div').show();
 			$('#sex-div').show();
 		}
 	});
@@ -42,8 +42,8 @@ $(function() {
 
 						var createType = $('#create-way').val();
 						var createNum = $('#create-num').val();
-						var surnameNum = $('#surname-num').val();
-						var nameNum = $('#name-num').val();
+						var xingNum = $('#xing-num').val();
+						var mingNum = $('#ming-num').val();
 						var sex = $('#sex').val();
 
 						$
@@ -53,8 +53,8 @@ $(function() {
 									data : {
 										"createType" : createType,
 										"createNum" : createNum,
-										"surnameNum" : surnameNum,
-										"nameNum" : nameNum,
+										"xingNum" : xingNum,
+										"mingNum" : mingNum,
 										"sex" : sex
 									},
 									success : function(data) {

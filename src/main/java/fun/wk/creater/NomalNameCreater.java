@@ -45,10 +45,10 @@ public class NomalNameCreater {
 			return this.getRandomShuangxing();
 	}
 	/**
-	 * 随机得到一个姓(等概率)
+	 * 随机得到一个姓(等概率单双姓)
 	 */
 	public String getRandomXing() {
-		double probability=Name.danxing.length/(Name.danxing.length+Name.shuangxing.length);
+		double probability=(double)Name.danxing.length/(Name.danxing.length+Name.shuangxing.length);
 		return this.getRandomXing(probability);
 	}
 	/**
@@ -62,10 +62,10 @@ public class NomalNameCreater {
 			return this.getRandomShuangming();
 	}
 	/**
-	 * 随机得到一个名(等概率)
+	 * 随机得到一个名(等概率单双名)
 	 */
 	public String getRandomMing() {
-		double probability=Name.danming.length/(Name.danming.length+Name.shuangming.length);
+		double probability=(double)((double)Name.danming.length/(Name.danming.length+Name.shuangming.length));
 		return this.getRandomMing(probability);
 	}
 }

@@ -22,16 +22,16 @@ public class NameCreateController {
 	 * 
 	 * @param createType	生成类型
 	 * @param createNum		生成数量
-	 * @param surnameNum	单双姓	0全部1单姓2双姓
-	 * @param nameNum		单双名	0全部1单名2双名
+	 * @param xingNum		单双姓	0全部1单姓2双姓
+	 * @param mingNum		单双名	0全部1单名2双名
 	 * @param sex			性别		0全部1男2女
 	 * @return
 	 */
 	@RequestMapping("/namecreate.do")
 	@ResponseBody
-	public String namecreate(int createType,int createNum,int surnameNum,int nameNum,int sex) {
+	public String namecreate(int createType,int createNum,int xingNum,int mingNum,int sex) {
 		if(createType==0) {
-			List<String> names=new NomalNameCreaterAdapter().getFullNames(createNum, surnameNum);
+			List<String> names=new NomalNameCreaterAdapter().createNames(createNum, xingNum, mingNum);
 			String results=JSONObject.toJSONString(names);
 			logger.debug(results);
 			return results;
