@@ -2,43 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title>小说辅助器</title>
 <!--  导入Bootstrap和JQuery -->
 <link href="css/lib/bootstrap.min.css" rel="stylesheet" />
 <script src="js/lib/jquery.min.js"></script>
 <script src="js/lib/bootstrap.min.js"></script>
 <!-- 自定义的css样式 -->
-<link href="css/mycommons.css" rel="stylesheet">
+<link href="css/mycommons.css?v=0.1" rel="stylesheet">
 <!-- 自定义的js脚本 -->
-<script src="js/MyUtil.js"></script>
-<script src="js/globalVar.js"></script>
-<script src="js/myAjax.js"></script>
-<script src="js/myListener.js"></script>
+<script src="js/MyUtil.js?v=0.1"></script>
+<script src="js/globalVar.js?v=0.1"></script>
+<script src="js/myAjax.js?v=0.1"></script>
+<script src="js/myListener.js?v=0.1"></script>
+
 
 <style type="text/css">
-#tab-contents div {
-	display: none
-}
 
-#tab-contents div:first-child {
-	display: block
-}
 </style>
 <script type="text/javascript">
 	$(function() {
-		$('#tab-titles li').click(
-				function() {
-					$(this).siblings().find('a').removeClass("active");
-					$(this).find("a").addClass("active");
-					$('#tab-contents div:eq(' + $(this).prevAll().length + ')')
-							.show().siblings('div').hide();
-				});
+		// 初始化
+		// 显示第一个tab-item的内容，隐藏其他的
+		$('#tab-contents div.tab-item:eq(0)').show().siblings('div').hide();
 	});
 </script>
 </head>
 <body>
-	<h1>首页</h1>
+	<!-- 	<h1>首页</h1> -->
+	<div class="title">
+		<h1>小说辅助器</h1>
+	</div>
 	<div class="container">
 		<ul id="tab-titles" class="nav nav-tabs">
 			<li class="nav-item"><a class="nav-link active">人名生成器</a></li>
@@ -47,16 +42,62 @@
 			<li class="nav-item"><a class="nav-link ">人物管理器</a></li>
 		</ul>
 		<div id="tab-contents">
-			<div>
-			筛选：性别
-			<select>
-			<option>男</option>
-			<option>女</option>
-			</select>
+			<div class="tab-item row" style="padding-top: 10px;">
+				<div class="col-md-3">
+					<div id="create-way-div" class="form-group row">
+						<label class="col-md-5" for="create-way">生成风格：</label> <select
+							id="create-way" class="form-control col-md-7">
+							<option value="0">普通名字</option>
+							<option value="1" selected>玄幻风格</option>
+						</select>
+					</div>
+					<div id="create-num-div" class="form-group row">
+						<label for="create-num" class="control-label col-md-5">生成数量：
+						</label>
+						<div class="col-md-7">
+							<input id="create-num" class="form-control" type="text"
+								value="100" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="surname-num-div" class="form-group row">
+						<label class="col-md-6" for="surname-num">单双姓：</label> <select
+							id="surname-num" class="form-control col-md-6">
+							<option value="0">全部</option>
+							<option value="1">单姓</option>
+							<option value="2">双姓</option>
+						</select>
+					</div>
+					<div id="name-num-div" class="form-group row">
+						<label class="col-md-6 control-label" for="name-num">单双名：
+						</label> <select id="name-num" class="form-control col-md-6"
+							style="width: 100px">
+							<option value="0">全部</option>
+							<option value="1">单名</option>
+							<option value="2">双名</option>
+						</select>
+					</div>
+				</div>
+				<div id="sex-div" class="col-md-3">
+					<div class="form-group row">
+						<label class="col-md-5" for="sex">性别：</label> <select id="sex"
+							class="form-control col-md-7">
+							<option value="0">全部</option>
+							<option value="1">男</option>
+							<option value="2">女</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<button type="button" id="name-create-btn" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="点击生成人名">人名生成</button>
+				</div>
+				<div id="result-div" class="col-md-12"></div>
 			</div>
-			<div>人物生成器</div>
-			<div>地名生成器</div>
-			<div>人物管理器</div>
+			<div class="tab-item row">人物生成器</div>
+			<div class="tab-item row">地名生成器</div>
+			<div class="tab-item row">人物管理器</div>
 		</div>
 	</div>
 </body>

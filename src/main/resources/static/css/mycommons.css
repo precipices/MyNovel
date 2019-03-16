@@ -1,4 +1,27 @@
 @charset "UTF-8";
+/* #tab-contents div.tab-item { */
+/* 	display: none  */
+/* }  */
+
+/* #tab-contents div:first-child { */
+/* 	display: block */
+/* } */
 body {
-	background: #FFF;
+	background: #EBF5DF;
+}
+
+.title {
+	background: #BAD4AA;
+	text-align: center;
+	/* 	background: url(../img/title.png) no-repeat; */
+	/*     background-size:100% 100%; */
+	/*     height:100px; */
+}
+
+.container {
+	background: #D4D4AA;
+}
+
+.mytable {
+	background: #C1A075;
 }
