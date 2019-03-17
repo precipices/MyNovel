@@ -18,7 +18,7 @@ public class NomalNameCreaterAdapter {
 	/**
 	 * 随机生成指定数量的姓名
 	 * @param createNum 	生成数量
-	 * @param xingNum	单双姓	0全部1单姓2双姓
+	 * @param xingNum		单双姓	0全部1单姓2双姓
 	 * @param mingNum		单双名	0全部1单名2双名
 	 */
 	public List<String> createNames(int createNum, int xingNum, int mingNum) {

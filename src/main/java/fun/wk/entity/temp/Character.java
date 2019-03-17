@@ -1,4 +1,4 @@
-package fun.wk.entity;
+package fun.wk.entity.temp;
 /**
  * 人物角色实体类
  */

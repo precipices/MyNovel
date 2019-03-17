@@ -44,18 +44,18 @@
 		<div id="tab-contents">
 			<div class="tab-item row" style="padding-top: 10px;">
 				<div class="col-md-3">
-					<div id="create-way-div" class="form-group row">
-						<label class="col-md-5" for="create-way">生成风格：</label> <select
-							id="create-way" class="form-control col-md-7">
+					<div id="create-way-div1" class="form-group row">
+						<label class="col-md-5" for="create-way1">生成风格：</label> <select
+							id="create-way1" class="form-control col-md-7">
 							<option value="0">普通名字</option>
 							<option value="1" selected>玄幻风格</option>
 						</select>
 					</div>
-					<div id="create-num-div" class="form-group row">
-						<label for="create-num" class="control-label col-md-5">生成数量：
+					<div id="create-num-div1" class="form-group row">
+						<label for="create-num1" class="control-label col-md-5">生成数量：
 						</label>
 						<div class="col-md-7">
-							<input id="create-num" class="form-control" type="text"
+							<input id="create-num1" class="form-control" type="text"
 								value="100" />
 						</div>
 					</div>
@@ -90,13 +90,35 @@
 					</div>
 				</div>
 				<div class="col-md-2">
-					<button type="button" id="name-create-btn" class="btn btn-primary"
+					<button type="button" id="create-btn1" class="btn btn-primary"
 						data-toggle="tooltip" data-placement="top" title="点击生成人名">人名生成</button>
 				</div>
-				<div id="result-div" class="col-md-12"></div>
+				<div id="result-div1" class="col-md-12"></div>
 			</div>
 			<div class="tab-item row">人物生成器</div>
-			<div class="tab-item row">地名生成器</div>
+			<div class="tab-item row" style="padding-top: 10px;">
+				<div class="col-md-3">
+					<div id="create-way-div3" class="form-group row">
+						<label class="col-md-5" for="create-way3">生成风格：</label> <select
+							id="create-way3" class="form-control col-md-7">
+							<option value="0" selected>玄幻风格地名</option>
+						</select>
+					</div>
+					<div id="create-num-div3" class="form-group row">
+						<label for="create-num3" class="control-label col-md-5">生成数量：
+						</label>
+						<div class="col-md-7">
+							<input id="create-num3" class="form-control" type="text"
+								value="100" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<button type="button" id="create-btn3" class="btn btn-primary"
+						data-toggle="tooltip" data-placement="top" title="点击生成地名">地名生成</button>
+				</div>
+				<div id="result-div3" class="col-md-12"></div>
+			</div>
 			<div class="tab-item row">人物管理器</div>
 		</div>
 	</div>

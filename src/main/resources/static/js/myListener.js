@@ -18,30 +18,28 @@ $(function() {
 						.siblings('div').hide();
 			});
 	// 人名生成方式监听器
-	$("#create-way").on("change", function() {
+	$("#create-way1").on("change", function() {
 		// 得到当前生成方式
 		var val = $(this).val();
 		if (val == 0) {
-			// $('#create-way-div').show();
-			// $('#create-num-div').show();
+			// $('#create-way-div1').show();
+			// $('#create-num-div1').show();
 			// $('#xing-num-div').show();
-//			$('#ming-num-div').hide();
+			// $('#ming-num-div').hide();
 			$('#sex-div').hide();
 		} else if (val == 1) {
-//			$('#ming-num-div').show();
+			// $('#ming-num-div').show();
 			$('#sex-div').show();
 		}
 	});
 
 	// 点击人名生成按钮
-	$('#name-create-btn')
-			.on(
-					"click",
+	$('#create-btn1').on("click",
 					function() {
 						var url = "/namecreate.do";
 
-						var createType = $('#create-way').val();
-						var createNum = $('#create-num').val();
+						var createType = $('#create-way1').val();
+						var createNum = $('#create-num1').val();
 						var xingNum = $('#xing-num').val();
 						var mingNum = $('#ming-num').val();
 						var sex = $('#sex').val();
@@ -59,7 +57,6 @@ $(function() {
 									},
 									success : function(data) {
 										var table = JSON.parse(data);
-										;
 										var resultTable = "<table>";
 										for (var i = 0; i < table.length;) {
 											resultTable += "<tr>";
@@ -72,8 +69,47 @@ $(function() {
 										}
 										resultTable += "</table>";
 										;
-										$("#result-div").html(resultTable);
-										$("#result-div")
+										$("#result-div1").html(resultTable);
+										$("#result-div1")
+												.find("table")
+												.addClass(
+														"table table-striped table-bordered mytable");
+
+									}
+								});
+					});
+	// 点击地名生成按钮
+	$('#create-btn3').on("click",
+					function() {
+						var url = "/placenamecreate.do";
+
+						var createType = $('#create-way3').val();
+						var createNum = $('#create-num3').val();
+
+						$
+								.ajax({
+									type : "POST",
+									url : url,
+									data : {
+										"createType" : createType,
+										"createNum" : createNum
+									},
+									success : function(data) {
+										var table = JSON.parse(data);
+										var resultTable = "<table>";
+										for (var i = 0; i < table.length;) {
+											resultTable += "<tr>";
+											for (var j = 0; j < 10
+													&& i < table.length; j++, i++) {
+												resultTable += "<td>"
+														+ table[i] + "</td>";
+											}
+											resultTable += "</tr>";
+										}
+										resultTable += "</table>";
+										;
+										$("#result-div3").html(resultTable);
+										$("#result-div3")
 												.find("table")
 												.addClass(
 														"table table-striped table-bordered mytable");

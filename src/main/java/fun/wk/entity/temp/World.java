@@ -1,4 +1,4 @@
-package fun.wk.entity;
+package fun.wk.entity.temp;
 
 public class World {
 	private String name;		//大世界名称

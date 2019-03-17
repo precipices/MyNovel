@@ -1,4 +1,4 @@
-package fun.wk.entity;
+package fun.wk.entity.temp;
 
 public interface SpeAttr {
 

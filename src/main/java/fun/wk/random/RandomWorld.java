@@ -1,6 +1,6 @@
 package fun.wk.random;
 
-import fun.wk.entity.World;
+import fun.wk.entity.temp.World;
 
 /**
  * 大世界类World随机生成算法
