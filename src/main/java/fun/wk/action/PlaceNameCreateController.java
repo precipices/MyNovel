@@ -16,7 +16,7 @@ import fun.wk.createradapter.FantasyPlaceCreaterAdapter;
  */
 @Controller
 public class PlaceNameCreateController {
-	private static Logger logger = Logger.getLogger(UserController.class);
+	private static Logger logger = Logger.getLogger(PlaceNameCreateController.class);
 
 	/**
 	 * 

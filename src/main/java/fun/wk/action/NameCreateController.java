@@ -16,7 +16,7 @@ import fun.wk.createradapter.NomalNameCreaterAdapter;
  */
 @Controller
 public class NameCreateController {
-	private static Logger logger = Logger.getLogger(UserController.class);
+	private static Logger logger = Logger.getLogger(NameCreateController.class);
 
 	/**
 	 * 

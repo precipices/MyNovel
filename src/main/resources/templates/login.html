@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录注册</title>
+<link rel="stylesheet" type="text/css"
+	href="css/login/normalize.css?v=0.1" />
+<!-- <link rel="stylesheet" type="text/css" href="css/login/htmleaf-demo.css?v=0.1"> -->
+<link rel="stylesheet" type="text/css" href="css/login/login.css?v=0.1">
+<script src="js/lib/jquery.min.js"></script>
+<script type="text/javascript">
+	//晃动表单
+	function shake(){
+		$("#login_form").removeClass('shake_effect');
+		setTimeout(function() {
+			$("#login_form").addClass('shake_effect')
+		}, 1);
+	}
+
+	// 	验证用户登录
+	function check_login() {
+		//从表单中取出填入的用户名密码
+		var name = $("#user_name").val();
+		var pass = $("#password").val();
+		//基础检测
+		if(name.trim()==""||pass.trim()==""){
+			shake();
+			return false;
+		}
+		//上传检测
+		var url = "checkuser.do";
+		$.ajax({
+			type : "POST",
+			url : url,
+			data : {
+				username : name,
+				password : pass
+			},
+			success : function(data) {
+				if (data == 1) {
+					window.location.href = "index";
+				} else if (data == 0) {
+					shake();
+				}
+			}
+		});
+
+	}
+	// 	验证用户注册
+	function check_register() {
+		var name = $("#r_user_name").val();
+		var pass = $("#r_password").val();
+		var pass2 = $("#r_password2").val();
+		var url="register.do";
+		if (name != "" && pass != "" && pass2 == pass) {
+			$.ajax({
+				type:"POST",
+				url:url,
+				data:{
+					username:name,
+					password:pass
+				},
+				success:function(data){
+					if (data== 0){
+						alert("用户名或密码为空");
+					}else if (data== 2){
+						alert("用户名不规范");
+					}else if (data== 3){
+						alert("密码复杂度不够");
+					}else if (data== 4){
+						alert("用户名已被注册");
+					}else if(data == 5){
+						alert("注册失败！");
+					}else if (data== 1){
+						alert("注册成功");
+						$("#user_name").val("");
+						$("#password").val("");
+						//切换
+						$('form').animate({
+							height : 'toggle',
+							opacity : 'toggle'
+						}, 'slow');
+						return;
+					}
+					shake();
+				}
+			});
+			
+		} else {
+			shake();
+		}
+	}
+	$(function() {
+		// 		在用户点击登录和注册按钮时分别执行以上两个函数
+		$("#create").click(function() {
+			check_register();
+			return false;
+		})
+		$("#login").click(function() {
+			check_login();
+			return false;
+		})
+		// 		表单的切换通过jQuery的animate()方法来实现：
+		$('.message a').click(function() {
+			$('form').animate({
+				height : 'toggle',
+				opacity : 'toggle'
+			}, 'slow');
+		});
+	})
+</script>
+</head>
+<body>
+	<div class="htmleaf-container">
+		<div id="wrapper" class="login-page">
+			<div id="login_form" class="form">
+				<!-- 注册 -->
+				<form class="register-form">
+					<input type="text" placeholder="用户名" id="r_user_name" />
+					<input type="password" placeholder="密码" id="r_password" /> 
+					<input type="password" placeholder="确认密码" id="r_password2" />
+					<button id="create">创建账户</button>
+					<p class="message">
+						已经有了一个账户? <a href="#">立刻登录</a>
+					</p>
+				</form>
+				<!-- 登录 -->
+				<form class="login-form">
+					<input type="text" placeholder="用户名" id="user_name" /> <input
+						type="password" placeholder="密码" id="password" />
+					<button id="login">登 录</button>
+					<p class="message">
+						还没有账户? <a href="#">立刻创建</a>
+					</p>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -2,11 +2,10 @@ package fun.wk.mynovel;
 
 import org.apache.log4j.Logger;
 
-import fun.wk.action.UserController;
 import fun.wk.creater.FantasyPlaceCreater;
 
 public class test {
-	private static Logger logger = Logger.getLogger(UserController.class);
+	private static Logger logger = Logger.getLogger(test.class);
 
 	public static void main(String[] args) {
 //		Random r=new Random();

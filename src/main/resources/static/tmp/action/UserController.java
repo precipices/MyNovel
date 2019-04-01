@@ -39,7 +39,7 @@ public class UserController {
 	@RequestMapping("/getUserByName")
 	@ResponseBody
 	public String getUserByName(String username) {
-		User u = userMapper.getUserByName(username);
+//		User u = userMapper.getUserByName(username);
 		
 
         // 记录debug级别的信息  
@@ -50,7 +50,7 @@ public class UserController {
 //        logger.error("This is error message."); 
     
 		
-		return JSONObject.toJSONString(u);
+		return JSONObject.toJSONString("");
 	}
 
 }

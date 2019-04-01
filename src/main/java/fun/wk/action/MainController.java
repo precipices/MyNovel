@@ -9,6 +9,10 @@ public class MainController {
 	public String index() {
 		return "index";
 	}
+	@RequestMapping(value= {"login","login.do"})
+	public String login() {
+		return "login";
+	}
 
 	@RequestMapping(value= {"test"})
 	public String test() {

@@ -1,6 +1,7 @@
 package fun.wk.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import fun.wk.entity.User;
 
@@ -10,14 +11,28 @@ import fun.wk.entity.User;
 @Mapper
 public interface UserMapper {
 
-	public void insert(User user);
+	/**
+	 * 检查用户名密码是否正确
+	 * 
+	 * @param userName
+	 * @param password
+	 * @return
+	 */
+	public User checkUser(@Param("userName") String userName, @Param("password") String password);
 
-	public void update(User user);
-
-	public void delete(int id);
-
-	public User getUserById(int id);
-
-	public User getUserByName(String username);
+	/**
+	 * 根据userName查询用户信息 
+	 * @param userName
+	 * @return
+	 */
+	public User queryUserByUserName(@Param("userName") String userName);
+	/**
+	 * 新增一个用户
+	 * @param user
+	 * @return
+	 */
+	public void insertUser(User user);
+	
+	
 
 }
