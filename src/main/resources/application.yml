@@ -7,9 +7,12 @@ server:
 mybatis:
     config-locations: classpath:mybatis-config.xml
 #  扫描数据持久对应的实体类 路径 Package级别
-    type-aliases-package: fun.wk.entity
+    type-aliases-package: com.wk.entity
 #  mybatis 对应的 .xml文件路径
     mapper-locations: classpath:mapper/*.xml
+#  开启驼峰匹配
+    configuration:
+        map-underscore-to-camel-case: true
 #  多层级目录  mapper-locations: classpath:mapper/**/**.xml
 spring:
     #数据库链接设置

@@ -8,14 +8,15 @@
 <!--  导入Bootstrap和JQuery -->
 <link href="css/lib/bootstrap.min.css" rel="stylesheet" />
 <script src="js/lib/jquery.min.js"></script>
-<script src="js/lib/bootstrap.min.js"></script>
+<script src="js/lib/bootstrap.bundle.min.js"></script>
+<!-- <script src="js/lib/bootstrap.min.js"></script> -->
 <!-- 自定义的css样式 -->
-<link href="css/mycommons.css?v=0.1" rel="stylesheet">
+<link href="css/mycommons.css?v=0.3" rel="stylesheet">
 <!-- 自定义的js脚本 -->
 <script src="js/MyUtil.js?v=0.1"></script>
 <script src="js/globalVar.js?v=0.1"></script>
 <script src="js/myAjax.js?v=0.1"></script>
-<script src="js/myListener.js?v=0.1"></script>
+<script src="js/myListener.js?v=0.3"></script>
 
 
 <style type="text/css">
@@ -23,32 +24,70 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		$("#test").click();
+		
 		// 初始化
 		// 显示第一个tab-item的内容，隐藏其他的
-		$('#tab-contents div.tab-item:eq(0)').show().siblings('div').hide();
+// 		$('#tab-contents div.tab-item:eq(0)').show().siblings('div').hide();
 	});
+	function change(goal,e,str){
+		goal.show().siblings('div').hide();
+		$("#tab-titles").find('a').removeClass("active");
+		$(e).addClass("active");
+		$(e).parent().siblings('a').addClass("active");
+		$("#title").text($(e).text());
+// 		$("#title").text(str);
+	}
 </script>
 </head>
 <body>
 	<!-- 	<h1>首页</h1> -->
-	<div class="title">
-		<h1>小说辅助器</h1>
+	<div class="title bg2">
+		<h1 id="title">小说辅助器</h1>
 	</div>
-	<div class="container">
+	<div class="container bg3">
 		<ul id="tab-titles" class="nav nav-tabs">
-			<li class="nav-item"><a class="nav-link active">人名生成器</a></li>
-			<li class="nav-item"><a class="nav-link ">人物生成器</a></li>
-			<li class="nav-item"><a class="nav-link ">地名生成器</a></li>
-			<li class="nav-item"><a class="nav-link ">人物管理器</a></li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle active" data-toggle="dropdown">生成器</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" onclick="change($('#name_create_div'),this,'人名生成器');">人名生成器</a>
+					<a class="dropdown-item" onclick="change($('#place_create_div'),this,'人名生成器');">地名生成器</a>
+				</div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown">书籍管理器</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" onclick="change($('#book_list_div'),this);">书籍列表</a>
+					<a class="dropdown-item">书籍导入</a>
+				</div>
+			
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown" >人物管理器</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" onclick="change($('#people_manage_div'),this);">人物管理器</a>
+					<a class="dropdown-item" onclick="change($('#people_relationship_div'),this);">人物关系图</a>
+					<a class="dropdown-item" onclick="change($('#people_create_div'),this);">人物生成器</a>
+			    </div>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" data-toggle="dropdown">用户</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="login.do">登录注册 </a>
+					<a id="test" class="dropdown-item" onclick="change($('#my_info_div'),this);">我的资料 </a>
+					<a class="dropdown-item" href="invalidate.do">注销 </a>
+				</div>
+			</li>
 		</ul>
-		<div id="tab-contents">
-			<div class="tab-item row" style="padding-top: 10px;">
+		
+		<div id="tab-contents" style="padding-top:10px;">
+			<div id="name_create_div" class="tab-item row">
 				<div class="col-md-3">
 					<div id="create-way-div1" class="form-group row">
 						<label class="col-md-5" for="create-way1">生成风格：</label> <select
 							id="create-way1" class="form-control col-md-7">
-							<option value="0">普通名字</option>
-							<option value="1" selected>玄幻风格</option>
+							<option value="0" selected>普通名字</option>
+							<option value="1">玄幻风格</option>
 						</select>
 					</div>
 					<div id="create-num-div1" class="form-group row">
@@ -65,7 +104,7 @@
 						<label class="col-md-6" for="xing-num">单双姓：</label> <select
 							id="xing-num" class="form-control col-md-6">
 							<option value="0">全部</option>
-							<option value="1">单姓</option>
+							<option value="1" selected>单姓</option>
 							<option value="2">双姓</option>
 						</select>
 					</div>
@@ -95,8 +134,8 @@
 				</div>
 				<div id="result-div1" class="col-md-12"></div>
 			</div>
-			<div class="tab-item row">人物生成器</div>
-			<div class="tab-item row" style="padding-top: 10px;">
+			<div id="people_create_div" class="tab-item row">人物生成器</div>
+			<div id="place_create_div" class="tab-item row">
 				<div class="col-md-3">
 					<div id="create-way-div3" class="form-group row">
 						<label class="col-md-5" for="create-way3">生成风格：</label> <select
@@ -119,7 +158,44 @@
 				</div>
 				<div id="result-div3" class="col-md-12"></div>
 			</div>
-			<div class="tab-item row">人物管理器</div>
+			<div id="people_manage_div" class="tab-item row">
+					<div class="list-group bg3" style="width:12%;padding-left:10px;">
+					    <a class="list-group-item list-group-item-action bg3" onclick="">人物管理器</a>
+					    <a class="list-group-item list-group-item-action bg3" onclick="">新增人物</a>
+					    <a class="list-group-item list-group-item-action bg3" onclick="">删除人物</a>
+					    <a class="list-group-item list-group-item-action bg3" onclick="">查找人物</a>
+					    <a class="list-group-item list-group-item-action bg3" onclick="">修改人物</a>
+					</div>
+					<div class="" style="width:88%;padding:0 10px;">
+						<table class="table table-striped table-bordered mytable"><tbody><tr><td>段建彰</td><td>靳惠菁</td><td>芦福</td><td>邬衣</td><td>苗晏</td><td>高琮</td><td>贾濡</td><td>赖宜君</td><td>莫础</td><td>魏思嘉</td></tr><tr><td>冉阡</td><td>魏克</td><td>荆际</td><td>许诗</td><td>吉怡儒</td><td>卢妗</td><td>戚禹</td><td>姜遥</td><td>晏婉茹</td><td>冼观</td></tr><tr><td>莫淑贞</td><td>糜宇轩</td><td>霍志豪</td><td>米玺</td><td>范莳</td><td>姚凯文</td><td>赵淑珍</td><td>舒龄</td><td>庞艾</td><td>柏佰</td></tr><tr><td>莫家源</td><td>欧明哲</td><td>卞屹</td><td>翟水</td><td>段明慧</td><td>苟彦廷</td><td>向伊</td><td>费锜</td><td>阎筑</td><td>曹山</td></tr><tr><td>解镁</td><td>项健豪</td><td>顾修</td><td>包建安</td><td>仇尊</td><td>丁礼</td><td>僧海</td><td>钟宣</td><td>宋镇</td><td>龚虔</td></tr><tr><td>陶锡</td><td>卢建华</td><td>纪怡玲</td><td>僧冠良</td><td>巩佳瑜</td><td>温猷</td><td>应炘</td><td>柴郁文</td><td>郜词</td><td>戴骐</td></tr><tr><td>莫田</td><td>秦闳</td><td>苗孟哲</td><td>莫足</td><td>薄泳</td><td>白筑</td><td>季娴</td><td>郁秋萍</td><td>徐慧珊</td><td>赵鐴</td></tr><tr><td>栾筑</td><td>隋法</td><td>边贸</td><td>常俊谚</td><td>钱锟</td><td>苟俞</td><td>植斯</td><td>沙益</td><td>万奕廷</td><td>畅明峰</td></tr><tr><td>辛林</td><td>迟俊嘉</td><td>卞政哲</td><td>苟怡蓉</td><td>程偲</td><td>位淑珍</td><td>乔柏安</td><td>鲍佩宜</td><td>彭庸</td><td>辛楙</td></tr><tr><td>苟光</td><td>孟宛臻</td><td>郜恺</td><td>石谋</td><td>楚尘</td><td>毛枚</td><td>申则</td><td>魏翰</td><td>黄俊宏</td><td>晋耀德</td></tr></tbody></table>
+					</div>
+			</div>
+			<div id="book_list_div" class="tab-item row">书籍列表
+			<table class="table table-striped table-bordered mytable">
+			<thead>
+				<tr>
+					<td>书名</td><td>创建日期</td><td>上次更新</td><td>操作</td>
+				</tr>
+			</thead>
+			<tbody><tr><td></td></tr></tbody>
+			</table>
+			
+			</div>
+			<div id="people_relationship_div" class="tab-item row">人物关系图</div>
+			<div id="my_info_div" class="tab-item" th:object="${session.user}">
+			<table>
+				<tr><td>id:</td><td><span th:text="*{id}"></span></td></tr>
+				<tr><td>用户名:</td><td><span th:text="*{userName}"></span></td></tr>
+				<tr><td>密码：</td><td><span th:text="*{password}"></span></td></tr>
+				<tr><td>姓名：</td><td><span th:text="*{name}"></span></td></tr>
+				<tr><td>性别：</td><td><span th:text="*{sex}"></span></td></tr>
+				<tr><td>生日：</td><td><span th:text="*{#dates.format(birthday, 'yyyy-MM-dd')}"></span></td></tr>
+				<tr><td>注册日期：</td><td><span th:text="*{#dates.format(created, 'yyyy-MM-dd HH:mm:ss')}"></span></td></tr>
+				<tr><td>名下书籍：</td><td><span th:text="*{bookList}"></span></td></tr>
+			</table>
+
+			
+			</div>
 		</div>
 	</div>
 </body>

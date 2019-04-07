@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
-<mapper namespace="fun.wk.dao.UserMapper">
+<mapper namespace="com.wk.dao.UserMapper">
 	<!-- 检查用户名密码是否正确 -->
-	<select id="checkUser" resultType="fun.wk.entity.User">
+	<select id="checkUser" resultType="com.wk.entity.User">
 		SELECT * FROM user WHERE
 		user_name
 		= #{userName} and password = #{password}
@@ -13,7 +13,7 @@
 	<!-- 新增的Statement id：唯一标识，随便写，在同一个命名空间下保持唯一，使用动态代理之后要求和方法名保持一致 parameterType：参数的类型，使用动态代理之后和方法的参数类型一致 
 		useGeneratedKeys:开启主键回写 keyColumn：指定数据库的主键 keyProperty：主键对应的pojo属性名 -->
 	<!-- 新增一个用户 -->
-	<insert id="insertUser" parameterType="fun.wk.entity.User"
+	<insert id="insertUser" parameterType="com.wk.entity.User"
 		useGeneratedKeys="true" keyColumn="id" keyProperty="id">
 		INSERT INTO `user`
 		( user_name, password, name, sex, birthday, created, updated) VALUES (
@@ -21,10 +21,29 @@
 		#{birthday}, NOW(), NOW());
 	</insert>
 	<!-- 根据userName查询用户信息 -->
-	<select id="queryUserByUserName" resultType="User">
+	<select id="queryUserByUserName" resultType="com.wk.entity.User">
 		select *
 		from user
 		where user_name=#{userName}
+	</select>
+	<!-- 用户及书 -->
+	<resultMap id="UserBook" type="com.wk.entity.User"
+		autoMapping="true">
+		<id column="id" property="id" />
+		<association property="bookList" javaType="List"
+			autoMapping="true">
+			<id column="book_id" property="id" />
+			<result column="book_created" property="created" />
+			<result column="book_updated" property="updated" />
+		</association>
+	</resultMap>
+	<!-- 根据id查询用户及其名下所有书的信息 -->
+	<select id="queryUserWithBookById" resultMap="UserBook">
+		select * ,book.id
+		as book_id,book.created as book_created,book.updated as
+		book_updated
+		from `user` left join book on `user`.id = book.user_id
+		where`user`.id=#{id}
 	</select>
 
 

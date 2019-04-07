@@ -2,21 +2,22 @@
  * 监听器集
  */
 
+
 $(function() {
 	// 初始化
 	// 显示第一个tab-item的内容，隐藏其他的
 	$('#tab-contents div.tab-item:eq(0)').show().siblings('div').hide();
-
+	$('#sex-div').hide();
 	// 切换选项卡监听器
-	$('#tab-titles li').click(
-			function() {
-				$(this).siblings().find('a').removeClass("active");
-				$(this).find("a").addClass("active");
-				$(
-						'#tab-contents div.tab-item:eq('
-								+ $(this).prevAll().length + ')').show()
-						.siblings('div').hide();
-			});
+//	$('#tab-titles li').click(
+//			function() {
+//				$(this).siblings().find('a').removeClass("active");
+//				$(this).find("a").addClass("active");
+//				$(
+//						'#tab-contents div.tab-item:eq('
+//								+ $(this).prevAll().length + ')').show()
+//						.siblings('div').hide();
+//			});
 	// 人名生成方式监听器
 	$("#create-way1").on("change", function() {
 		// 得到当前生成方式

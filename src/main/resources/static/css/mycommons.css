@@ -11,17 +11,34 @@ body {
 }
 
 .title {
-	background: #BAD4AA;
+/* 	background: #BAD4AA; */
 	text-align: center;
 	/* 	background: url(../img/title.png) no-repeat; */
 	/*     background-size:100% 100%; */
 	/*     height:100px; */
 }
 
-.container {
-	background: #D4D4AA;
+/* .container { */
+/* 	background: #D4D4AA; */
+/* } */
+
+
+.bg1{
+	background: #ECF5E0;
+}
+.bg2{
+	background: #B9D4A9;
+}
+.bg3{
+	background: #D3D4AA;
+}
+.bg4{
+	background: #C1A075;
+}
+.bg5{
+	background: #7D6354;
 }
 
-.mytable {
-	background: #C1A075;
+.mytable{
+	background: #ECF5E0;
 }
