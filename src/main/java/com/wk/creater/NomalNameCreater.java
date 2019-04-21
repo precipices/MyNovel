@@ -1,6 +1,6 @@
 package com.wk.creater;
 
-import com.wk.staticdata.Name;
+import com.wk.tool.Name;
 
 /**
  * 普通人名生成器

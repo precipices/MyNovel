@@ -25,14 +25,14 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		logger.debug("destroy.......");
+//		logger.debug("destroy.......");
 
 	}
 
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
-		logger.debug("doFilter.......");
+//		logger.debug("doFilter.......");
 		HttpServletRequest req = (HttpServletRequest) arg0;
 		HttpServletResponse resp = (HttpServletResponse) arg1;
 		HttpSession session = req.getSession();
@@ -40,9 +40,9 @@ public class LoginFilter implements Filter {
 		String path = req.getRequestURI();
 		// 从session取得已经登录验证的凭证 我这里的demo用的是password来作为登录凭证
 		User user= (User) session.getAttribute("user");
-		logger.debug("user:"+user);
-		logger.debug("path:"+path);
-		if (path.contains("/js/")||path.contains("login")||path.contains("checkuser")||path.contains("register")) {// 注意：登录页面千万不能过滤 不然过滤器就。。。。。自行调试不要偷懒！这样记忆深刻
+//		logger.debug("user:"+user);
+//		logger.debug("path:"+path);
+		if (path.contains("test")||path.contains("/js/")||path.contains("login")||path.contains("checkuser")||path.contains("register")) {// 注意：登录页面千万不能过滤 不然过滤器就。。。。。自行调试不要偷懒！这样记忆深刻
 			arg2.doFilter(req, resp);
 			return;
 		} else {// 如果不是login.jsp进行过滤
@@ -59,7 +59,7 @@ public class LoginFilter implements Filter {
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		logger.debug("init.......");
+//		logger.debug("init.......");
 	}
 
 }

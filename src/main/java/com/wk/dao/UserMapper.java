@@ -37,11 +37,12 @@ public interface UserMapper {
 	public void insertUser(User user);
 
 	/**
-	 * 根据id查询用户及其名下所有书的信息
-	 * 
+	 * 根据id查询用户及其名下所有小说的信息;
+	 * 该方法bug:当用户名下没有书时，小说列表会包含一本没有book_id的书
 	 * @param id
 	 * @return
 	 */
+	@Deprecated
 	public User queryUserWithBookById(@Param("id") int id);
 
 }

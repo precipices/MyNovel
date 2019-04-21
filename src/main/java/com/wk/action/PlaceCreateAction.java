@@ -8,29 +8,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
-import com.wk.createradapter.NomalNameCreaterAdapter;
+import com.wk.createradapter.FantasyPlaceCreaterAdapter;
 /**
  * 处理人名生成器相关请求
  *
  */
 @Controller
-public class NameCreateController {
-	private static Logger logger = Logger.getLogger(NameCreateController.class);
+public class PlaceCreateAction {
+	private static Logger logger = Logger.getLogger(PlaceCreateAction.class);
 
 	/**
 	 * 
 	 * @param createType	生成类型
 	 * @param createNum		生成数量
-	 * @param xingNum		单双姓	0全部1单姓2双姓
-	 * @param mingNum		单双名	0全部1单名2双名
-	 * @param sex			性别		0全部1男2女
 	 * @return
 	 */
-	@RequestMapping("/namecreate.do")
+	@RequestMapping("/placenamecreate.do")
 	@ResponseBody
-	public String namecreate(int createType,int createNum,int xingNum,int mingNum,int sex) {
+	public String namecreate(int createType,int createNum) {
 		if(createType==0) {
-			List<String> names=new NomalNameCreaterAdapter().createNames(createNum, xingNum, mingNum);
+			List<String> names=new FantasyPlaceCreaterAdapter().createPlaceNames(createNum);
 			String results=JSONObject.toJSONString(names);
 			logger.debug(results);
 			return results;

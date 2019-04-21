@@ -21,6 +21,11 @@ spring:
         url: jdbc:mysql://localhost:3306/mynovel?characterEncoding=utf8&useSSL=false
         username: root
         password: 123456
+    #上传文件大小限制
+    servlet:
+        multipart:
+            max-file-size: 5Mb
+            max-request-size: 30Mb
     #禁止thymeleaf缓存（建议：开发环境设置为false，生成环境设置为true）
     thymeleaf:
         cache: false

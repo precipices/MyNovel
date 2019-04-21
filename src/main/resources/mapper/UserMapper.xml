@@ -30,12 +30,12 @@
 	<resultMap id="UserBook" type="com.wk.entity.User"
 		autoMapping="true">
 		<id column="id" property="id" />
-		<association property="bookList" javaType="List"
-			autoMapping="true">
+		<collection property="bookList" javaType="List"
+			ofType="com.wk.entity.Book" autoMapping="true">
 			<id column="book_id" property="id" />
 			<result column="book_created" property="created" />
 			<result column="book_updated" property="updated" />
-		</association>
+		</collection>
 	</resultMap>
 	<!-- 根据id查询用户及其名下所有书的信息 -->
 	<select id="queryUserWithBookById" resultMap="UserBook">

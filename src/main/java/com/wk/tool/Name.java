@@ -1,4 +1,4 @@
-package com.wk.staticdata;
+package com.wk.tool;
 
 public class Name {
 	/**

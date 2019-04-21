@@ -2,6 +2,51 @@
  * 监听器集
  */
 
+//验证上传类型
+function checkUploadType(ele) {
+	// 返回 KB，保留小数点后两位
+	// alert((ele.files[0].size/(1024*1024)).toFixed(2));
+	var file = ele.value;
+	if (!/.(txt|word)$/.test(file)) {
+		alert("上传类型必须是txt,word中的一种");
+		$(ele).val("");
+		return false;
+	}
+	// 返回Byte(B),保留小数点后两位
+	if (((ele.files[0].size).toFixed(2)) >= (1000 * 1024 * 1024)) {
+		alert("请上传小于1000M的文件");
+		$(ele).val("");
+		return false;
+	}
+}
+// 点击提交按钮，上传文件
+function bookUpload() {
+	var file = $("#book_upload_file");
+	if (file.val() == "" || file.val() == null) {
+		alert("文件为空！");
+		return;
+	}
+	var url = "/bookUpload.do";
+	// 上传文件
+	$.ajax({
+		type : "POST",
+		url : url,
+		contentType : false,
+		processData : false,
+		data : new FormData($("#book_upload_form")[0]),
+		success : function(data) {
+			alert(data);
+			// // 上传成功则载入文件
+			// if (data != "上传失败！") {
+			// filePath = data;
+			// // 关闭模态框
+			// $("#myModal").modal("hide");
+			// } else {
+			// alert(data);
+			//			}
+		}
+	});
+}
 
 $(function() {
 	// 初始化

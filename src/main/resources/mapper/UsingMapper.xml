@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.dao.UsingMapper">
+	<!-- 为用户新增一张正在使用表 -->
+	<insert id="insertUsing">
+		INSERT INTO `using`
+		(user_id) VALUES (#{userId});
+	</insert>
+	<!-- 查询用户的正在使用表 -->
+	<select id="queryUsingByUserId" resultType="com.wk.entity.Using">
+		Select * from `using` where user_id = #{userId};
+	</select>
+</mapper>

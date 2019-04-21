@@ -1,6 +1,6 @@
 package com.wk.creater;
 
-import com.wk.staticdata.PlaceName;
+import com.wk.tool.PlaceName;
 
 public class FantasyPlaceCreater {
 	/**

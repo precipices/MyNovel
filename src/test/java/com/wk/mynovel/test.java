@@ -3,22 +3,14 @@ package com.wk.mynovel;
 import org.apache.log4j.Logger;
 
 import com.wk.creater.FantasyPlaceCreater;
+import com.wk.tool.TxtReadTool;
 
 public class test {
 	private static Logger logger = Logger.getLogger(test.class);
 
 	public static void main(String[] args) {
-//		Random r=new Random();
-//		Math.random();
-//		System.out.println(new Random().nextInt(2));
-		FantasyPlaceCreater c=new FantasyPlaceCreater();
-		String str="\n";
-		for(int i=0;i<10;i++) {
-			for(int j=0;j<10;j++)
-				str+=c.getRandomPlaceName()+"\t";
-			str+="\n";
-		}
-		logger.debug(str);
+		StringBuffer sb=TxtReadTool.getSB("E:\\CodingPlace\\eclipse_nomal\\mynovel\\target\\classes\\upload\\我有一座恐怖屋.txt");
+		System.out.println(sb);
 	}
 
 }

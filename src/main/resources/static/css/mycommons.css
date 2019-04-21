@@ -1,11 +1,5 @@
 @charset "UTF-8";
-/* #tab-contents div.tab-item { */
-/* 	display: none  */
-/* }  */
 
-/* #tab-contents div:first-child { */
-/* 	display: block */
-/* } */
 body {
 	background: #EBF5DF;
 }
@@ -18,11 +12,23 @@ body {
 	/*     height:100px; */
 }
 
-/* .container { */
-/* 	background: #D4D4AA; */
-/* } */
+.left-div{
+	width:12%;
+/* 	padding-left:10px; */
+}
+.right-div{
+	width:88%;
+	padding-left:10px;
+/* 	padding:0 10px; */
+}
 
+.hidden{
+	display:none;
+}
 
+.bg0{
+	background: #FFFFFF;
+}
 .bg1{
 	background: #ECF5E0;
 }
@@ -41,4 +47,14 @@ body {
 
 .mytable{
 	background: #ECF5E0;
+}
+
+.smFont{
+	font-size:8px;
+}
+.midFont{
+	font-size:12px;
+}
+.largeFont{
+	font-size:16px;
 }

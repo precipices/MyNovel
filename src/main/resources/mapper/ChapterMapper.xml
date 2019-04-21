@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.dao.ChapterMapper">
+	<!-- 根据内容id查询章节内容 -->
+	<select id="queryContentByContentId" resultType="String">
+		SELECT content
+		FROM content WHERE id = #{id}
+	</select>
+	<!-- 根据小说id查询小说的所有章节信息 -->
+	<select id="queryChapterListByBookId" resultType="com.wk.entity.Chapter">
+		SELECT * FROM
+		chapter WHERE book_id = #{bookId};
+	</select>
+	<!-- 根据章节id查询章节信息 -->
+	<select id="queryChapterByChapterId" resultType="com.wk.entity.Chapter">
+		select * from chapter where id = #{chapterId};
+	</select>
+</mapper>
