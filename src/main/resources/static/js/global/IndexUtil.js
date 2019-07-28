@@ -1,45 +1,33 @@
 /**
- * index.html页面的工具集，会使用到页面中的id,提供给后续阶层调用
+ * index.html页面的工具集，可能会使用到页面中的id,提供给后续阶层调用
  */
-
-/**
- * 标题栏切换div
- * @param goal 目标div对象
- * @param e
- * @param str
- * @returns
- */
-function change(goal,e,str){
-	//显示目标div并隐藏并列div
-	goal.show().siblings('div').hide();
-	//移除所有选项卡的active模式
-	$("#menu_bar_ul").find('a').removeClass("active");
-	//为本选项卡添加active
-	$(e).addClass("active");
-	//为父选项卡添加active
-	$(e).parent().siblings('a').addClass("active");
-	//将标题设置为本选项卡内文本
-	if(e!=null)
-		$("#title").text($(e).text());
-	else if(str!=null)
- 		$("#title").text(str);
+// 返回val的字节长度
+function getByteLen(val) {
+	var len = 0;
+	for (var i = 0; i < val.length; i++) {
+		if (val[i] == ' ' || val[i] == '\n') {
+			// 什么都不做
+		} else if (val[i].match(/[^\x00-\xff]/ig) != null) // 全角
+			len += 2;
+		else
+			len += 1;
+	}
+	return len;
 }
 /**
- * 左侧选项卡切换右侧div
- * @param goal
+ * 返回val的字数,汉字算一个，标点字母算半个，空格算0个
+ * @param val
  * @returns
  */
-function changeRight(goal,e,str){
-	//显示目标div并隐藏并列div
-	goal.show().siblings('div').hide();
-	//移除所有选项卡的active模式
-	$(e).parent().find('a').removeClass("active");
-	//为本选项卡添加active
-	$(e).addClass("active");
-	//将标题设置为本选项卡内文本
-	if(e!=null)
-		$("#title").text($(e).text());
-	else if(str!=null)
- 		$("#title").text(str);
-
+function getWordNum(val) {
+	var len = 0;
+	for (var i = 0; i < val.length; i++) {
+		if (val[i] == ' ' || val[i] == '\n') {
+			// 什么都不做
+		} else if (val[i].match(/[^\x00-\xff]/ig) != null) // 全角
+			len += 1;
+		else
+			len += 0.5;
+	}
+	return len;
 }

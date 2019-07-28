@@ -24,9 +24,9 @@ function changeWithTitleWithActiveTab(goalId,titleStr,thisEle){
 		//移除菜单栏所有选项卡的active模式
 		$("#menu_bar_ul").find('a').removeClass("active");
 		//为本二级菜单添加active
-		$(e).addClass("active");
+		$(thisEle).addClass("active");
 		//为父一级菜单添加active
-		$(e).parent().siblings('a').addClass("active");
+		$(thisEle).parent().siblings('a').addClass("active");
 	}
 }
 /**

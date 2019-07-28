@@ -1,6 +1,5 @@
 package com.wk.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -13,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wk.dao.BookMapper;
-import com.wk.dao.ChapterMapper;
 import com.wk.entity.Book;
-import com.wk.entity.Chapter;
 import com.wk.entity.User;
 import com.wk.service.SessionService;
 import com.wk.tool.Status;
-
+/**
+ * 书籍管理器相关控制器，用于接收前端发来的与书籍管理相关的请求，并调用相关类与方法返回相应数据或处理结果状态值。
+ */
 @Controller
 public class BookManageAction {
 	private static Logger logger = Logger.getLogger(BookManageAction.class);

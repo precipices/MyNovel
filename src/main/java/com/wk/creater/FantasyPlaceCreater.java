@@ -1,7 +1,9 @@
 package com.wk.creater;
 
 import com.wk.tool.PlaceName;
-
+/**
+ * 玄幻地名生成器
+ */
 public class FantasyPlaceCreater {
 	/**
 	 * 随机得到一个形容词1

@@ -18,9 +18,9 @@ spring:
     #数据库链接设置
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/mynovel?characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://39.105.185.87:3306/mynovel?characterEncoding=utf8&useSSL=false
         username: root
-        password: 123456
+        password: 2017qw
     #上传文件大小限制
     servlet:
         multipart:

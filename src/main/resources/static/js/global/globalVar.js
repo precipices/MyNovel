@@ -1,6 +1,30 @@
 /**
  * 全局变量集 不允许调用到其他js里的变量或方法，不存在前置js
  */
+/**
+ * 正在使用的小说id,用于判断正在浏览哪本小说，再次读取该本小说相关的数据不用重新从数据库获取
+ */
+var usingBookId = null;
+/**
+ * 正在使用的章节id,用于判断正在查看和修改哪个章节
+ */
+var usingChapterId = null;
+/**
+ * 正在使用的内容id,用于判断正在查看和修改哪个章节，再次读取该章节内容不用冲数据库重新获取
+ */
+var usingContentId = null;
+/**
+ * 正在使用的content(章节内容)，用于跟更新后的章节内容进行对比，相同则无需沟通服务器上传
+ */
+var usingContent = null;
+/**
+ * 章节编辑器，用于查看编辑更新章节内容，在index页面加载完毕后被创建
+ */
+var chapterEditor = null;
+/**
+ * 书籍管理器命令flg,0:出错 1：删除小说 2：修改小说信息 3：查看小说信息（不可编辑）（暂时没写） 4：查看章节列表
+ */
+var commandFlg=4;
 var Ids = {
 	// +全局标题div
 	title_div : "title_div",
@@ -13,7 +37,7 @@ var Ids = {
 	// +--菜单栏下侧div容器,0级div
 	below_container_div : "below_container_div",
 	/**
-	 * 书籍列表,一级div
+	 * 书籍列表,一级div-----------------------------------------------------------------------
 	 */
 	// +书籍列表容器div,一级div
 	book_list_content_div : "book_list_content_div",
@@ -51,6 +75,32 @@ var Ids = {
 	book_list_table_thead : "book_list_table_thead",
 	// ------+--书籍列表表格tbody
 	book_list_table_tbody : "book_list_table_tbody",
+	/**
+	 * 章节管理器,一级div-------------------------------------------------------------------------------
+	 */
+	// +章节管理器容器div,一级div
+	chapter_manage_content_div : "chapter_manage_content_div",
+	// +-+章节管理左侧容器div,二级div
+	chapter_manage_left_content_div : "chapter_manage_left_content_div",
+	// +-+--章节列表导航按钮,三级a
+	chapter_list_change_btn : "chapter_list_change_btn",
+	// +-+--新增/更新章节表单导航按钮,三级a
+	update_chapter_editor_change_btn : "update_chapter_editor_change_btn",
+	// +-+章节管理右侧容器div,二级div
+	chapter_manage_right_content_div : "chapter_manage_right_content_div",
+	// --+-+章节列表右侧div,三级div
+	chapter_list_rignt_div : "chapter_list_rignt_div",
+	// ----+-+章节列表表格
+	chapter_list_table : "chapter_list_table",
+	// ------+--章节列表表格thead
+	chapter_list_table_thead : "chapter_list_table_thead",
+	// ------+--章节列表表格tbody
+	chapter_list_table_tbody : "chapter_list_table_tbody",
+	/**
+	 * 人物管理器，一级div
+	 */
+	//
+	people_manage_content_div : "people_manage_content_div",
 }
 
 var Statics = {

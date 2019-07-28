@@ -12,7 +12,9 @@ import com.wk.action.LoginRegisterAction;
 import com.wk.dao.BookMapper;
 import com.wk.entity.Book;
 import com.wk.entity.User;
-
+/**
+ * 控制和刷新session中数据的service，对session中数据进行统一全面的管控，将常用的数据加载进session，当用户需要获取的数据在session中已存在时，将不沟通数据库，而是直接从session中获取。
+ */
 @Service
 public class SessionService {
 	private static Logger logger = Logger.getLogger(SessionService.class);

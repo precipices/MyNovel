@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.dao.CharacterMapper">
+	<!-- 根据人物id查询人物 -->
+	<select id="getCharacterByChId" resultType="com.wk.entity.Character">
+		select * from
+		`character` where id=#{chId}
+	</select>
+	<!-- 根据小说id查询人物列表 -->
+	<select id="getCharacterListByBookId" resultType="com.wk.entity.Character">
+		select * from
+		`character` where book_id=#{bookId}
+	</select>
+
+	<!-- 根据章节id查询出场人物 -->
+	<select id="getCharacterListByChapterId" resultType="com.wk.entity.Character">
+		select *
+		from `character` where id in(select cht_id from `chp_cht` where
+		chp_id=#{chId});
+	</select>
+
+	<!-- 根据人物id查询出场章节 -->
+	<select id="getChapterListByChId" resultType="com.wk.entity.Chapter">
+		select * from
+		`chapter` where id in (select chp_id from chp_cht where
+		cht_id=#{chapterId}) ;
+	</select>
+	<!-- 更新人物信息 -->
+	<update id="updateCharacter" parameterType="com.wk.entity.Character">
+		update `character`
+		<trim prefix="set" suffixOverrides=",">
+			<if test="bookId!=null and bookId!=0">book_id=#{bookId},</if>
+			<if test="chName!=null and chName!=''">ch_name=#{chName},</if>
+			<if test="chAttr!=null and chAttr!=''">ch_attr=#{chAttr},</if>
+			<if test="sex!=null and sex!=0">sex=#{sex},</if>
+			<if test="belong!=null and belong!=''">belong=#{belong},</if>
+			<if test="intro!=null and intro!=''">intro=#{intro},</if>
+			<if test="firstAppearId!=null and firstAppearId!=0">first_appear_id=#{firstAppearId},</if>
+			<if test="appearTimes!=null and appearTimes!=0">appear_times=#{appearTimes},</if>
+			updated=NOW(),
+		</trim>
+		where id=#{id};
+	</update>
+
+	<!-- 插入新人物 -->
+	<insert id="insertCharacter" useGeneratedKeys="true" keyColumn="id"
+		keyProperty="id" parameterType="com.wk.entity.Character">
+		INSERT INTO
+		`character`(book_id,ch_name,ch_attr,sex,belong,intro,first_appear_id,appear_times,created,updated)
+		values(#{bookId},#{chName},#{chAttr},#{sex},#{belong},#{intro},#{firstAppearId},#{appearTimes},NOW(),NOW());
+	</insert>
+
+	<!-- 根据人物id删除人物 -->
+	<update id="deleteCharacterByChId">
+		delete from `character` where id = #{chId}
+	</update>
+
+
+</mapper>

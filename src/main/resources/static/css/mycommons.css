@@ -3,7 +3,9 @@
 body {
 	background: #EBF5DF;
 }
-
+label{
+	font-weight:bold;
+}
 .title {
 /* 	background: #BAD4AA; */
 	text-align: center;
@@ -48,7 +50,28 @@ body {
 .mytable{
 	background: #ECF5E0;
 }
+.mytable {
+	border: 1px solid #ddd;
+/* 	width: 800px; */
+	table-layout: fixed; /* 只有定义了表格的布局算法为fixed，下面td的定义才能起作用。 */
+}
 
+.mytable td {
+	border: 1px solid #ddd;
+	width: 100%;
+/* 	word-break: keep-all; 不换行 */
+/* 	white-space: nowrap; 不换行 */
+	/*  white-space:pre-line;/* 不换行 */
+	overflow: hidden; /* 内容超出宽度时隐藏超出部分的内容 */
+	text-overflow: ellipsis;
+	/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+}
+
+.mytable td:hover {
+	background-color: #f5f5f5;
+/* 	overflow: visible; */
+	/*        white-space: normal; */
+}
 .smFont{
 	font-size:8px;
 }
@@ -57,4 +80,23 @@ body {
 }
 .largeFont{
 	font-size:16px;
+}
+
+.mytableContentDiv{
+	height:0px;
+	padding-bottom:80%;
+/* 	max-height: 340px; */
+	overflow-y:auto;
+/*     overflow-y: scroll; */
+/*     overflow-x: hidden; */
+}
+
+.mytableContentFixedDiv{
+	max-height: 800px;
+	overflow-y:auto;
+/*     overflow-y: scroll; */
+/*     overflow-x: hidden; */
+}
+.w-e-text-container{
+height: 700px !important;/*!important是重点，因为原div是行内样式设置的高度300px*/
 }

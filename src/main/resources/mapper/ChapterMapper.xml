@@ -1,18 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wk.dao.ChapterMapper">
-	<!-- 根据内容id查询章节内容 -->
-	<select id="queryContentByContentId" resultType="String">
-		SELECT content
-		FROM content WHERE id = #{id}
-	</select>
 	<!-- 根据小说id查询小说的所有章节信息 -->
-	<select id="queryChapterListByBookId" resultType="com.wk.entity.Chapter">
-		SELECT * FROM
-		chapter WHERE book_id = #{bookId};
-	</select>
+<!-- 	<select id="queryChapterListByBookId" resultType="com.wk.entity.Chapter"> -->
+<!-- 		SELECT * FROM -->
+<!-- 		chapter WHERE book_id = #{bookId}; -->
+<!-- 	</select> -->
 	<!-- 根据章节id查询章节信息 -->
-	<select id="queryChapterByChapterId" resultType="com.wk.entity.Chapter">
-		select * from chapter where id = #{chapterId};
-	</select>
+<!-- 	<select id="queryChapterByChapterId" resultType="com.wk.entity.Chapter"> -->
+<!-- 		select * from -->
+<!-- 		chapter where id = #{chapterId}; -->
+<!-- 	</select> -->
+
+<!-- 	<insert id="insertChapter" useGeneratedKeys="true" keyColumn="id" -->
+<!-- 		keyProperty="id" parameterType="com.wk.entity.Chapter"> -->
+<!-- 		INSERT INTO -->
+<!-- 		chapter(title,book_id,content_id,words,created,updated) -->
+<!-- 		values(#{title},#{bookId},#{contentId},#{words},NOW(),NOW()); -->
+<!-- 	</insert> -->
+
+	<!-- 修改更新时间为当前时间 -->
+<!-- 	<update id="updateUpdatedTime"> -->
+<!-- 		update chapter set updated=NOW() where -->
+<!-- 		id=#{chapterId}; -->
+<!-- 	</update> -->
+
+	<!-- 根据章节id删除章节 -->
+<!-- 	<update id="deleteChapterByChapterId"> -->
+<!-- 		delete from chapter where id = #{chapterId}; -->
+<!-- 	</update> -->
+
+	<!-- 根据章节id删除章节内容 -->
+<!-- 	<update id="deleteContentByChapterId"> -->
+<!-- 		delete from content where id in (select content_id -->
+<!-- 		from chapter where id = -->
+<!-- 		#{chapterId}); -->
+<!-- 	</update> -->
+
+	<!-- 更新章节信息 -->
+<!-- 	<update id="updateChapter" parameterType="com.wk.entity.Book"> -->
+<!-- 		update chapter -->
+<!-- 		<trim prefix="set" suffixOverrides=","> -->
+<!-- 			<if test="title!=null and title!=''">title=#{title},</if> -->
+<!-- 			<if test="bookId!=null and bookId!=0">book_id=#{bookId},</if> -->
+<!-- 			<if test="contentId!=null and contentId!=0">content_id=#{contentId},</if> -->
+<!-- 			<if test="words!=null and words!=0">words=#{words},</if> -->
+<!-- 			updated=NOW(), -->
+<!-- 		</trim> -->
+<!-- 		WHERE -->
+<!-- 		(id=#{id}); -->
+<!-- 	</update> -->
 </mapper>

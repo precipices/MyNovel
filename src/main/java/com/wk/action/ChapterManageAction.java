@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.wk.dao.BookMapper;
 import com.wk.dao.ChapterMapper;
 import com.wk.entity.Book;
 import com.wk.entity.Chapter;
 import com.wk.entity.User;
-import com.wk.service.SessionService;
+import com.wk.service.CrossDaoService;
 import com.wk.tool.Status;
 
 @Controller
@@ -50,6 +49,12 @@ public class ChapterManageAction {
 		}
 	}
 
+	/**
+	 * 获取章节列表
+	 * 
+	 * @param bookId
+	 * @return
+	 */
 	@RequestMapping(value = "getChapterList.do", method = RequestMethod.POST)
 	@ResponseBody
 	public ArrayList<Chapter> getChapterList2(int bookId) {
@@ -58,10 +63,53 @@ public class ChapterManageAction {
 		return chapterList;
 	}
 
+	@Autowired
+	CrossDaoService crossDao;
 
-	@RequestMapping(value = "getContent.do", method = RequestMethod.POST)
+	/**
+	 * 新增章节
+	 * 
+	 * @param bookId
+	 * @param title
+	 * @param words
+	 * @param content
+	 * @return
+	 */
+	@RequestMapping(value = "createChapter.do", method = RequestMethod.POST)
 	@ResponseBody
-	public String getContent(int contentId) {
-		return chapterMapper.queryContentByContentId(contentId);
+	public int createChapter(int bookId, String title, int words, String content) {
+
+		Chapter chapter = new Chapter();
+		chapter.setBookId(bookId);
+		chapter.setTitle(title);
+		chapter.setWords(words);
+		int result = crossDao.insertChapterWithContent(chapter, content);
+		if (result > 0)
+			return Status.SUCCESS;
+		else
+			return Status.FAILED;
 	}
+
+	/**
+	 * 根据章节id删除章节内容和章节信息
+	 * 
+	 * @param chapterId
+	 * @return
+	 */
+	@RequestMapping(value = "deleteChapter.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int deleteChapter(int chapterId) {
+		//删除章节内容
+		int result=-1;
+		result = chapterMapper.deleteContentByChapterId(chapterId);
+		if(result<=0)
+			return Status.FAILED;
+		//删除章节信息
+		result = chapterMapper.deleteChapterByChapterId(chapterId);
+		if (result > 0)
+			return Status.SUCCESS;
+		else
+			return Status.FAILED;
+	}
+
 }

@@ -6,7 +6,7 @@ import java.util.List;
 import com.wk.creater.NomalNameCreater;
 
 /**
- * 普通人名生成器
+ * 普通人名生成器适配器
  */
 public class NomalNameCreaterAdapter {
 	private NomalNameCreater nomalNameCreater = null;

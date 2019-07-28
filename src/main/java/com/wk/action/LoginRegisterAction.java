@@ -108,8 +108,8 @@ public class LoginRegisterAction {
 		userMapper.insertUser(user);
 		logger.debug("将用户信息存入数据库:"+user);
 		// 为用户创建一张正在使用表
-		usingMapper.insertUsing(user.getId());
-		logger.debug("为用户创建一张正在使用表");
+//		usingMapper.insertUsing(user.getId());
+//		logger.debug("为用户创建一张正在使用表");
 
 		// 注册成功
 		if (user.getId() > 0) {

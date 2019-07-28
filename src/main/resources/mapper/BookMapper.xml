@@ -2,38 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wk.dao.BookMapper">
 	<!-- 根据用户ID查询所有书 -->
-	<select id="queryBookByUserId" resultType="com.wk.entity.Book">
-		SELECT * FROM book
-		where user_id=#{userId}
-	</select>
+<!-- 	<select id="queryBookByUserId" resultType="com.wk.entity.Book"> -->
+<!-- 		SELECT * FROM book -->
+<!-- 		where user_id=#{userId} -->
+<!-- 	</select> -->
 	<!-- 根据小说id查询小说信息 -->
-	<select id="queryBookByBookId" resultType="com.wk.entity.Book">
-		select * from book
-		where id = #{bookId}
-	</select>
+<!-- 	<select id="queryBookByBookId" resultType="com.wk.entity.Book"> -->
+<!-- 		select * from book -->
+<!-- 		where id = #{bookId} -->
+<!-- 	</select> -->
 	<!-- 根据小说id删除小说 -->
-	<update id="deleteBook">
-		delete from book where id = #{bookId}
-	</update>
+<!-- 	<update id="deleteBook"> -->
+<!-- 		delete from book where id = #{bookId} -->
+<!-- 	</update> -->
 	<!-- 新增一本小说 -->
-	<insert id="insertBook" useGeneratedKeys="true" keyColumn="id"
-		keyProperty="id" parameterType="com.wk.entity.Book">
-		INSERT INTO book (user_id,book_name,
-		intro, type, tags, created,updated)
-		values(#{userId},#{bookName},#{intro},#{type},#{tags},NOW(),NOW());
-	</insert>
+<!-- 	<insert id="insertBook" useGeneratedKeys="true" keyColumn="id" -->
+<!-- 		keyProperty="id" parameterType="com.wk.entity.Book"> -->
+<!-- 		INSERT INTO book (user_id,book_name, -->
+<!-- 		intro, type, tags, created,updated) -->
+<!-- 		values(#{userId},#{bookName},#{intro},#{type},#{tags},NOW(),NOW()); -->
+<!-- 	</insert> -->
 
 	<!-- 更新小说 -->
-	<update id="updateBook" parameterType="com.wk.entity.Book">
-		update book
-		<trim prefix="set" suffixOverrides=",">
-			<if test="bookName!=null">book_name=#{bookName},</if>
-			<if test="intro!=null">intro=#{intro},</if>
-			<if test="type!=null">type=#{type},</if>
-			<if test="tags!=null">tags=#{tags},</if>
-			updated=now(),
-		</trim>
-		WHERE
-		(id=#{id});
-	</update>
+<!-- 	<update id="updateBook" parameterType="com.wk.entity.Book"> -->
+<!-- 		update book -->
+<!-- 		<trim prefix="set" suffixOverrides=","> -->
+<!-- 			<if test="userId!=null and userId!=0">user_id=#{userId},</if> -->
+<!-- 			<if test="bookName!=null and bookName!=''">book_name=#{bookName},</if> -->
+<!-- 			<if test="intro!=null and intro!=''">intro=#{intro},</if> -->
+<!-- 			<if test="type!=null and type!=''">type=#{type},</if> -->
+<!-- 			<if test="tags!=null and tags!=''">tags=#{tags},</if> -->
+<!-- 			updated=NOW(), -->
+<!-- 		</trim> -->
+<!-- 		WHERE -->
+<!-- 		(id=#{id}); -->
+<!-- 	</update> -->
 </mapper>

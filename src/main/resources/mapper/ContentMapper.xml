@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wk.dao.ContentMapper">
+	<!-- 根据内容id查询章节内容 -->
+	<select id="queryContentByContentId" resultType="String">
+		SELECT content
+		FROM content WHERE id = #{id}
+	</select>
+
+	<!-- 根据内容id和内容修改章节内容 -->
+	<update id="updateContentByContentId">
+		update content set content=#{content} where
+		id=#{contentId};
+	</update>
+
+	<!-- 插入章节内容，返回章节内容id -->
+	<insert id="insertContent" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.wk.entity.ChapterContent">
+		INSERT INTO content (content) values(#{content});
+	</insert>
+</mapper>

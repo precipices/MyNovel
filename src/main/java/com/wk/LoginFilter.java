@@ -17,7 +17,9 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import com.wk.entity.User;
-
+/**
+ * 登录过滤器
+ */
 @Component
 @WebFilter(filterName = "loginFileter", urlPatterns = { "/*" })
 public class LoginFilter implements Filter {

@@ -23,15 +23,14 @@ function refreshBookList(){
 			      +"<td>"+bookList[i].type+"</td>"
 			      +"<td>"+bookList[i].tags+"</td>"
 			      +"<td>"+bookList[i].intro+"</td>"
-			      +"<td>"+bookList[i].updated+"</td>"
 			      +"<td>"+bookList[i].created+"</td>"
-			      +"<td><button class='btn btn-primary smFont' onclick='viewChapterList("+bookList[i].id+");'>查看章节</button>"
-			      +"&nbsp;<button class='btn btn-primary smFont' onclick='deleteBook("+bookList[i].id+",this);'>删除本书</button>"
-			      +"&nbsp;<button class='btn btn-primary smFont' onclick='openUpdateBookFrom("+bookList[i].id+");'>修改信息</button>"
+			      +"<td>"+bookList[i].updated+"</td>"
+			      +"<td><button class='btn btn-primary smFont selectFunc' onclick='execFuncByFlg("+bookList[i].id+",this);'>查看章节</button>"
 				  +"</td>"
 			      +"</tr>";
 			}
 			$("#book_list_table_tbody").html(tbody);
+			commandFlg=4;//按钮名称变成了查看章节，所以这里得把flg改成4
 		},
 		error:function(){
 			alert("服务器无响应！");
