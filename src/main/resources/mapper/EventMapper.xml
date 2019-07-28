@@ -2,60 +2,60 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wk.dao.EventMapper">
 	<!-- 根据事件id查询事件 -->
-	<select id="getEventByEvId" resultType="com.wk.entity.Event">
-		select * from
-		`event`
-		where id=#{evId}
-	</select>
+<!-- 	<select id="getEventByEvId" resultType="com.wk.entity.Event"> -->
+<!-- 		select * from -->
+<!-- 		`event` -->
+<!-- 		where id=#{evId} -->
+<!-- 	</select> -->
 	<!-- 根据小说id查询事件列表 -->
-	<select id="getEventListByBookId" resultType="com.wk.entity.Event">
-		select * from
-		`event` where book_id=#{bookId}
-	</select>
+<!-- 	<select id="getEventListByBookId" resultType="com.wk.entity.Event"> -->
+<!-- 		select * from -->
+<!-- 		`event` where book_id=#{bookId} -->
+<!-- 	</select> -->
 
 	<!-- 根据人物id查询出场事件 -->
-	<select id="getEventListByChId" resultType="com.wk.entity.Event">
-		select *
-		from `event`
-		where id in(select ev_id from `ev_ch` where
-		ch_id=#{chId});
-	</select>
+<!-- 	<select id="getEventListByChId" resultType="com.wk.entity.Event"> -->
+<!-- 		select * -->
+<!-- 		from `event` -->
+<!-- 		where id in(select ev_id from `ev_ch` where -->
+<!-- 		ch_id=#{chId}); -->
+<!-- 	</select> -->
 	<!-- 将人物从事件参与人物中删除 -->
-	<update id="deleteChFromEventByChId">
-		delete from `ev_ch` where ch_id = #{chId} and ev_id=#{evId}
-	</update>
+<!-- 	<update id="deleteChFromEventByChId"> -->
+<!-- 		delete from `ev_ch` where ch_id = #{chId} and ev_id=#{evId} -->
+<!-- 	</update> -->
 	<!-- 根据事件id查询出场人物 -->
-	<select id="getCharacterListByEvId" resultType="com.wk.entity.Character">
-		select * from
-		`character` where id in (select ch_id from ev_ch where
-		ev_id=#{evId}) ;
-	</select>
+<!-- 	<select id="getCharacterListByEvId" resultType="com.wk.entity.Character"> -->
+<!-- 		select * from -->
+<!-- 		`character` where id in (select ch_id from ev_ch where -->
+<!-- 		ev_id=#{evId}) ; -->
+<!-- 	</select> -->
 	<!-- 更新事件信息 -->
-	<update id="updateEvent" parameterType="com.wk.entity.Event">
-		update `event`
-		<trim prefix="set" suffixOverrides=",">
-			<if test="bookId!=null and bookId!=0">book_id=#{bookId},</if>
-			<if test="evName!=null and evName!=''">ev_name=#{evName},</if>
-			<if test="intro!=null and intro!=''">intro=#{intro},</if>
-			<if test="origin!=null and origin!=''">origin=#{origin},</if>
-			<if test="result!=null and result!=''">result=#{result},</if>
-			updated=NOW(),
-		</trim>
-		where id=#{id};
-	</update>
+<!-- 	<update id="updateEvent" parameterType="com.wk.entity.Event"> -->
+<!-- 		update `event` -->
+<!-- 		<trim prefix="set" suffixOverrides=","> -->
+<!-- 			<if test="bookId!=null and bookId!=0">book_id=#{bookId},</if> -->
+<!-- 			<if test="evName!=null and evName!=''">ev_name=#{evName},</if> -->
+<!-- 			<if test="intro!=null and intro!=''">intro=#{intro},</if> -->
+<!-- 			<if test="origin!=null and origin!=''">origin=#{origin},</if> -->
+<!-- 			<if test="result!=null and result!=''">result=#{result},</if> -->
+<!-- 			updated=NOW(), -->
+<!-- 		</trim> -->
+<!-- 		where id=#{id}; -->
+<!-- 	</update> -->
 
 	<!-- 插入新事件 -->
-	<insert id="insertEvent" useGeneratedKeys="true" keyColumn="id"
-		keyProperty="id" parameterType="com.wk.entity.Event">
-		INSERT INTO
-		`event`(book_id,ev_name,intro,origin,result,created,updated)
-		values(#{bookId},#{evName},#{intro},#{origin},#{result},NOW(),NOW());
-	</insert>
+<!-- 	<insert id="insertEvent" useGeneratedKeys="true" keyColumn="id" -->
+<!-- 		keyProperty="id" parameterType="com.wk.entity.Event"> -->
+<!-- 		INSERT INTO -->
+<!-- 		`event`(book_id,ev_name,intro,origin,result,created,updated) -->
+<!-- 		values(#{bookId},#{evName},#{intro},#{origin},#{result},NOW(),NOW()); -->
+<!-- 	</insert> -->
 
 	<!-- 根据事件id删除事件 -->
-	<update id="deleteEventByEvId">
-		delete from `event` where id = #{evId}
-	</update>
+<!-- 	<update id="deleteEventByEvId"> -->
+<!-- 		delete from `event` where id = #{evId} -->
+<!-- 	</update> -->
 
 
 </mapper>

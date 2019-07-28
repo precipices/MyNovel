@@ -2,7 +2,12 @@ package com.wk.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.wk.entity.Character;
 import com.wk.entity.Event;
@@ -14,6 +19,9 @@ public interface EventMapper {
 	 * @param evId
 	 * @return
 	 */
+	@Select(value= {"select * from" + 
+			"		`event`" + 
+			"		where id=#{evId}"})
 	Event getEventByEvId(int evId);
 
 	/**
@@ -22,6 +30,8 @@ public interface EventMapper {
 	 * @param bookId
 	 * @return
 	 */
+	@Select(value= {"select * from" + 
+			"		`event` where book_id=#{bookId}"})
 	List<Event> getEventListByBookId(int bookId);
 
 	/**
@@ -30,6 +40,10 @@ public interface EventMapper {
 	 * @param chId
 	 * @return
 	 */
+	@Select(value= {"select *" + 
+			"		from `event`" + 
+			"		where id in(select ev_id from `ev_ch` where" + 
+			"		ch_id=#{chId});"})
 	List<Event> getEventListByChId(int chId);
 	
 	/**
@@ -37,6 +51,7 @@ public interface EventMapper {
 	 * @param chId
 	 * @return
 	 */
+	@Delete(value= {"delete from `ev_ch` where ch_id = #{chId} and ev_id=#{evId}"})
 	int deleteChFromEventByChId(@Param("chId")int chId,@Param("evId")int evId);
 
 	/**
@@ -45,6 +60,9 @@ public interface EventMapper {
 	 * @param evId
 	 * @return
 	 */
+	@Select(value= {"select * from" + 
+			"		`character` where id in (select ch_id from ev_ch where" + 
+			"		ev_id=#{evId}) ;"})
 	List<Character> getCharacterListByEvId(int evId);
 
 	/**
@@ -53,6 +71,16 @@ public interface EventMapper {
 	 * @param ev
 	 * @return
 	 */
+	@Update(value= {"<script/>update `event`" + 
+			"		<trim prefix=\"set\" suffixOverrides=\",\">" + 
+			"			<if test=\"bookId!=null and bookId!=0\">book_id=#{bookId},</if>" + 
+			"			<if test=\"evName!=null and evName!=''\">ev_name=#{evName},</if>" + 
+			"			<if test=\"intro!=null and intro!=''\">intro=#{intro},</if>" + 
+			"			<if test=\"origin!=null and origin!=''\">origin=#{origin},</if>" + 
+			"			<if test=\"result!=null and result!=''\">result=#{result},</if>" + 
+			"			updated=NOW()," + 
+			"		</trim>" + 
+			"		where id=#{id};</script>"})
 	int updateEvent(Event ev);
 
 	/**
@@ -61,6 +89,10 @@ public interface EventMapper {
 	 * @param ev
 	 * @return
 	 */
+	@Options(useGeneratedKeys=true,keyColumn="id",keyProperty="id")
+	@Insert(value= {"INSERT INTO" + 
+			"		`event`(book_id,ev_name,intro,origin,result,created,updated)" + 
+			"		values(#{bookId},#{evName},#{intro},#{origin},#{result},NOW(),NOW());"})
 	int insertEvent(Event ev);
 
 	/**
@@ -69,5 +101,6 @@ public interface EventMapper {
 	 * @param id
 	 * @return
 	 */
+	@Delete(value= {"delete from `event` where id = #{evId}"})
 	int deleteEventByEvId(int id);
 }
