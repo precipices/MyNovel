@@ -99,7 +99,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.46</version>
+			<version>1.2.83</version>
 		</dependency>
 		<!-- 引入POI，用于操作Excel等文件的导入导出 -->
 		<dependency>
